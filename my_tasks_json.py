@@ -1,28 +1,12 @@
-def reader(filename):
-    '''
-    Чтение содержимого json файла 
-    '''
-    import json    
-    try:
-        with open(filename) as f_obj:
-            numbers = json.load(f_obj)
-        return numbers
-    except Exception as e:
-        return e
-def writer(filename, numbers):    
-    import json    
-    try:
-        with open(filename, 'w') as f_obj:
-            json.dump(numbers, f_obj)
-    except Exception as e:
-        print(e)
+import json
+
 
 print('1. Добавить задачу.\n2. Вывести список задач.\n3. Выход.')
 a=int(input('Выберете действие: '))
-filename = 'data.json'
-if reader(filename) == None:
-    numbers = []
-else: numbers = reader(filename)
+lst = []
+with open('data.json') as file:
+    lst = json.load(file)
+
 
 while a!=3:
     if a==1:
@@ -35,12 +19,17 @@ while a!=3:
             'category' : s2,
             'time' : s3
             }
-        numbers.append(el)
-        writer(filename, numbers)
+        
+        lst.append(el)
+        with open('data.json', 'w') as file:
+            json.dump(lst, file)
 
     elif a==2:
-        print(reader(filename))
+        with open('data.json', 'r') as file:
+            print(file)
+
+
     print('1. Добавить задачу.\n2. Вывести список задач.\n3. Выход.')
     a=int(input('Выберете действие: '))
-print('Задачи сохранены в файл!')
 
+print('Задачи сохранены в файл!')
