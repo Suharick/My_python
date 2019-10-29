@@ -1,4 +1,3 @@
-#Наточка я люблю тебя 
 import tkinter
 import pygame
 import time
